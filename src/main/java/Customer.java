@@ -31,10 +31,10 @@ public class Customer {
         // add content lines
         for (Rental each : _rentals) {
             //determine amounts for each line
-            double thisAmount = getAmount(each.getMovie().getPriceCode(), each.getDaysRented());
+            double thisAmount = each.getCharge();
 
             // add frequent renter points
-            frequentRenterPoints += getPoint(each.getMovie().getPriceCode(), each.getDaysRented());
+            frequentRenterPoints += each.getPoint();
 
             // show figures for this rental
             result += getTitle(each.getMovie().getTitle(), thisAmount);
@@ -48,7 +48,7 @@ public class Customer {
         return result;
     }
 
-    private static String getTitle(String title, double thisAmount) {
+    private String getTitle(String title, double thisAmount) {
         return "\t" + title + "\t" + String.valueOf(thisAmount) + "\n";
     }
 
@@ -58,29 +58,5 @@ public class Customer {
 
     private String getHeadLines() {
         return "Rental Record for " + getName() + "\n";
-    }
-
-    private int getPoint(int priceCode, int daysRented) {
-        return 1 + (priceCode == Movie.NEW_RELEASE && daysRented > 1 ? 1 : 0);
-    }
-
-    private double getAmount(int priceCode, int daysRented) {
-        double thisAmount = 0.0;
-        switch (priceCode) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (daysRented > 2)
-                    thisAmount += (daysRented - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += daysRented * 3;
-                break;
-            case Movie.CHILDRENS:
-                thisAmount += 1.5;
-                if (daysRented > 3)
-                    thisAmount += (daysRented - 3) * 1.5;
-                break;
-        }
-        return thisAmount;
     }
 }
