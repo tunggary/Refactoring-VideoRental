@@ -1,5 +1,9 @@
 
 import org.junit.jupiter.api.Test;
+import policy.ChildMoviePolicy;
+import policy.NewReleaseMoviePolicy;
+import policy.RegularMoviePolicy;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTest {
@@ -27,7 +31,7 @@ public class CustomerTest {
     public void statementForRegularMovieRentalForLessThan3Days() {
         // arrange
         Customer customer = new Customer("NAME_NOT_IMPORTANT");
-        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.REGULAR);
+        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.REGULAR, new RegularMoviePolicy());
         int daysRented = 2;
         Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
@@ -46,7 +50,7 @@ public class CustomerTest {
     public void statementForNewReleaseMovie() {
         // arrange
         Customer customer = new Customer("NAME_NOT_IMPORTANT");
-        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE);
+        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE, new NewReleaseMoviePolicy());
         int daysRented = 1;
         Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
@@ -65,7 +69,7 @@ public class CustomerTest {
     public void statementForChildrensMovieRentalMoreThan3Days() {
         // arrange
         Customer customer = new Customer("NAME_NOT_IMPORTANT");
-        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS);
+        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS, new ChildMoviePolicy());
         int daysRented = 4;
         Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
@@ -84,7 +88,7 @@ public class CustomerTest {
     public void statementForChildrensMovieRentalMoreThan4Days() {
         // arrange
         Customer customer = new Customer("NAME_NOT_IMPORTANT");
-        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS);
+        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS, new ChildMoviePolicy());
         int daysRented = 3;
         Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
@@ -103,7 +107,7 @@ public class CustomerTest {
     public void statementForNewReleaseMovieRentalMoreThan1Day() {
         // arrange
         Customer customer = new Customer("NAME_NOT_IMPORTANT");
-        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE);
+        Movie movie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE, new NewReleaseMoviePolicy());
         int daysRented = 2;
         Rental rental = new Rental(movie, daysRented);
         customer.addRental(rental);
@@ -122,9 +126,9 @@ public class CustomerTest {
     public void statementForFewMovieRental() {
         // arrange
         Customer customer = new Customer("NAME_NOT_IMPORTANT");
-        Movie regularMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.REGULAR);
-        Movie newReleaseMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE);
-        Movie childrensMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS);
+        Movie regularMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.REGULAR, new RegularMoviePolicy());
+        Movie newReleaseMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.NEW_RELEASE, new NewReleaseMoviePolicy());
+        Movie childrensMovie = new Movie("TITLE_NOT_IMPORTANT", Movie.CHILDRENS, new ChildMoviePolicy());
         customer.addRental(new Rental(regularMovie, 1));
         customer.addRental(new Rental(newReleaseMovie, 4));
         customer.addRental(new Rental(childrensMovie, 4));
