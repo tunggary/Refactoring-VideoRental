@@ -5,10 +5,6 @@ public class Customer {
 
     private String _name;
     private List<Rental> _rentals = new ArrayList<Rental>();
-
-    private double _amount = 0.0;
-    private int _point = 0;
-
     public Customer(String name) {
         _name = name;
     }

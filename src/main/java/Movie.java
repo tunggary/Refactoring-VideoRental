@@ -11,16 +11,10 @@ public class Movie {
 
     private MoviePolicy _policy;
 
-
-
     public Movie(String title, int priceCode, MoviePolicy policy) {
         _title = title;
         _priceCode = priceCode;
         _policy = policy;
-    }
-
-    public int getPriceCode() {
-        return _priceCode;
     }
 
     public String getTitle() {
