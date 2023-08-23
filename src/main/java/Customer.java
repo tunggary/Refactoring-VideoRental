@@ -6,6 +6,9 @@ public class Customer {
     private String _name;
     private List<Rental> _rentals = new ArrayList<Rental>();
 
+    private double _amount = 0.0;
+    private int _point = 0;
+
     public Customer(String name) {
         _name = name;
     }
@@ -21,8 +24,11 @@ public class Customer {
     public String statement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        String result = "Rental Record for " + getName() + "\n";
 
+        // add header lines
+        String result = getHeadLines();
+
+        // add content lines
         for (Rental each : _rentals) {
             double thisAmount = 0;
 
@@ -55,9 +61,18 @@ public class Customer {
         }
 
         // add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        result += getFootLines(totalAmount, frequentRenterPoints);
 
         return result;
     }
+
+    private String getFootLines(double totalAmount, int frequentRenterPoints) {
+        return "Amount owed is " + String.valueOf(totalAmount) + "\n" + "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+    }
+
+    private String getHeadLines() {
+        return "Rental Record for " + getName() + "\n";
+    }
+
+
 }
