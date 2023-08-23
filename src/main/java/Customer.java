@@ -37,7 +37,7 @@ public class Customer {
             frequentRenterPoints += each.getPoint();
 
             // show figures for this rental
-            result += getTitle(each.getMovie().getTitle(), thisAmount);
+            result += getTitle(each.getMovieTitle(), thisAmount);
 
             totalAmount += thisAmount;
         }

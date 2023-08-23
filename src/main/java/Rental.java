@@ -26,4 +26,8 @@ public class Rental {
     public int getPoint() {
         return _movie.getPoint(_daysRented);
     }
+
+    public String getMovieTitle() {
+        return _movie.getTitle();
+    }
 }
