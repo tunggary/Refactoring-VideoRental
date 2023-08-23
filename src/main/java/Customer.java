@@ -37,7 +37,8 @@ public class Customer {
             frequentRenterPoints += getPoint(each.getMovie().getPriceCode(), each.getDaysRented());
 
             // show figures for this rental
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+            result += getTitle(each.getMovie().getTitle(), thisAmount);
+
             totalAmount += thisAmount;
         }
 
@@ -45,6 +46,10 @@ public class Customer {
         result += getFootLines(totalAmount, frequentRenterPoints);
 
         return result;
+    }
+
+    private static String getTitle(String title, double thisAmount) {
+        return "\t" + title + "\t" + String.valueOf(thisAmount) + "\n";
     }
 
     private String getFootLines(double totalAmount, int frequentRenterPoints) {
